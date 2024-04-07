@@ -32,7 +32,7 @@ def all_time_slots():
 
 def get_valid_time_slots(time_slots, book_date):
     current_time = datetime.now(australian_timezone)
-    if book_date > current_time.date().strftime('%d/%m/%Y'):
+    if book_date > current_time.date():
         valid_slots = time_slots
     else:
         valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
