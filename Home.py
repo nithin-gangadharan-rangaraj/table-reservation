@@ -13,7 +13,7 @@ hide_decoration_bar_style = '''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 
 def get_info():
-  with st.form("reservation"):
+  with st.form("reservation", border=False):
     group_size = st.number_input("🤵‍♂️Size of the Group")
     book_date = st.date_input("📅 Reservation Date")
     book_time = st.selectbox("🕛 Pick a Time Slot", options = ['12:00', '12:30'])
