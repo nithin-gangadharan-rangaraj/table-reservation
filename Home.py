@@ -26,12 +26,12 @@ def all_time_slots():
     while current_time <= end_time:
         time_slots.append(current_time)
         current_time += timedelta(minutes=30)
-    st.write(time_slots)
     return time_slots
 
 def get_valid_time_slots(time_slots):
     current_time = datetime.now()
     valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
+    st.write(valid_slots)
     return valid_slots
 
 def get_valid_dates():
