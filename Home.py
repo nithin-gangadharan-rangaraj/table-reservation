@@ -6,7 +6,7 @@ def get_info():
     book_date = st.date_input("📅 Reservation Date")
     book_time = st.selectbox("🕛 Pick a Time Slot", options = ['12:00', '12:30'])
     
-    reserve_button = st.form_submit_button("Reserve")
+    reserve_button = st.form_submit_button("Reserve", type = "primary")
     if reserve_button:
       st.write("This functionality is not working yet. :(")
 
