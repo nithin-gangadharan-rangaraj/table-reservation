@@ -49,7 +49,7 @@ def get_info():
     
     reserve_button = st.form_submit_button("Reserve", type = "primary")
     if reserve_button:
-      st.write("This functionality is not working yet. :(")
+        st.write("This functionality is not working yet. :(")
 
 if __name__ == "__main__":
   get_info()
