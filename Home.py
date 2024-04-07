@@ -31,7 +31,7 @@ def all_time_slots():
 
 def get_valid_time_slots(time_slots):
     current_time = datetime.now()
-    valid_slots = [t for t in time_slots if t > current_time]
+    valid_slots = [f"{t.hours}:{t.minutes}" for t in time_slots if t > current_time]
     return valid_slots
 
 def get_valid_dates():
