@@ -5,7 +5,7 @@ hide_decoration_bar_style = '''
         header {visibility: hidden;}
         MainMenu {visibility: hidden;}
         .block-container {
-                    padding-top: 1rem;
+                    padding-top: 2rem;
                     padding-bottom: 0rem;
                     padding-left: 5rem;
                     padding-right: 5rem;
