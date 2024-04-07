@@ -30,8 +30,8 @@ def all_time_slots():
 
 def get_valid_time_slots(time_slots):
     current_time = datetime.now().replace(year=2000, month=1, day=1)
+    st.write(current_time)
     valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
-    # st.write(valid_slots)
     return valid_slots
 
 def get_valid_dates():
