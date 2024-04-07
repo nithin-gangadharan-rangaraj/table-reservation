@@ -1,5 +1,12 @@
 import streamlit as st
 
+hide_decoration_bar_style = '''
+    <style>
+        header {visibility: hidden;}
+    </style>
+'''
+st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+
 def get_info():
   with st.form("reservation"):
     group_size = st.number_input("🤵‍♂️Size of the Group")
