@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
+import pytz
 
 hide_decoration_bar_style = '''
     <style>
@@ -12,11 +13,12 @@ hide_decoration_bar_style = '''
     </style>
 '''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+australian_timezone = pytz.timezone('Australia/Sydney')
 
 def all_time_slots():
     # Define the start and end times
-    start_time = datetime.now().replace(hour = 11, minute = 0)
-    end_time = datetime.now().replace(hour = 22, minute = 0)
+    start_time = datetime.now(australian_timezone).replace(hour = 11, minute = 0)
+    end_time = datetime.now(australian_timezone).replace(hour = 22, minute = 0)
     # start_time = datetime.strptime('11:00', '%H:%M').replace(year=2000, month=1, day=1)
     # end_time = datetime.strptime('22:00', '%H:%M').replace(year=2000, month=1, day=1)
     
@@ -31,13 +33,13 @@ def all_time_slots():
     return time_slots
 
 def get_valid_time_slots(time_slots):
-    current_time = datetime.now()
+    current_time = datetime.now(australian_timezone)
     st.write(current_time)
     valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
     return valid_slots
 
 def get_valid_dates():
-    today = datetime.now().date()
+    today = datetime.now(australian_timezone).date()
     seventh_day = today + timedelta(days=6)
     return today, seventh_day
 
