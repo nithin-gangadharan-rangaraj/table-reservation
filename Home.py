@@ -30,9 +30,12 @@ def all_time_slots():
         current_time += timedelta(minutes=30)
     return time_slots
 
-def get_valid_time_slots(time_slots):
+def get_valid_time_slots(time_slots, book_date):
     current_time = datetime.now(australian_timezone)
-    valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
+    if book_date > current_time.date().strftime('%d/%m/%Y'):
+        valid_slots = time_slots
+    else:
+        valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
     return valid_slots
 
 def get_valid_dates():
@@ -48,7 +51,7 @@ def get_info():
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
 
       
-    book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots()))
+    book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
     
     reserve_button = st.form_submit_button("Reserve", type = "primary")
     if reserve_button:
