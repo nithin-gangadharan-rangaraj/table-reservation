@@ -45,7 +45,7 @@ def get_info():
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
 
       
-    book_time = st.time_input("🕛 Pick a Time Slot", value = "now", step=datetime.timedelta(minutes=30))
+    book_time = st.time_input("🕛 Pick a Time Slot", value = "now", step=timedelta(minutes=30))
     
     reserve_button = st.form_submit_button("Reserve", type = "primary")
     if reserve_button:
