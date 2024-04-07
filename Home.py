@@ -44,7 +44,7 @@ def get_valid_dates():
     return today, seventh_day
 
 def get_info():
-  with st.form("reservation", border=False):
+  with st.container(border=False):
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_valid_dates()
@@ -53,8 +53,7 @@ def get_info():
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
     
-    reserve_button = st.form_submit_button("Reserve", type = "primary")
-    if reserve_button:
+    if st.button("Reserve", type = "primary"):
         st.write("This functionality is not working yet. :(")
 
 if __name__ == "__main__":
