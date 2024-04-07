@@ -13,24 +13,26 @@ hide_decoration_bar_style = '''
 '''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 
-# def all_time_slots():
-#     # Define the start and end times
-#     start_time = datetime.strptime('11:00', '%H:%M')
-#     end_time = datetime.strptime('22:00', '%H:%M')
+def all_time_slots():
+    # Define the start and end times
+    start_time = datetime.strptime('11:00', '%H:%M')
+    end_time = datetime.strptime('22:00', '%H:%M')
     
-#     # Initialize the list to store time slots as datetime objects
-#     time_slots = []
+    # Initialize the list to store time slots as datetime objects
+    time_slots = []
     
-#     # Generate time slots every half hour
-#     current_time = start_time
-#     while current_time <= end_time:
-#         time_slots.append(current_time)
-#         current_time += timedelta(minutes=30)
+    # Generate time slots every half hour
+    current_time = start_time
+    while current_time <= end_time:
+        time_slots.append(current_time)
+        current_time += timedelta(minutes=30)
 
-#     return time_slots
+    return time_slots
 
-# def get_valid_time_slots():
-#     current_time = datetime.now()
+def get_valid_time_slots(time_slots):
+    current_time = datetime.now()
+    valid_slots = [t for t in time_slots if t > current_time]
+    return valid_slots
 
 def get_valid_dates():
     today = datetime.now().date()
@@ -45,7 +47,7 @@ def get_info():
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
 
       
-    book_time = st.time_input("🕛 Pick a Time Slot", value = "now", step=timedelta(minutes=30))
+    book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots()))
     
     reserve_button = st.form_submit_button("Reserve", type = "primary")
     if reserve_button:
