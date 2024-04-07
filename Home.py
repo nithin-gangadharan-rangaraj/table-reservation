@@ -53,7 +53,7 @@ def get_info():
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
     
-    if st.button("Reserve", type = "primary"):
+    if st.button("Reserve", type = "primary", use_container_width = True):
         st.write("This functionality is not working yet. :(")
 
 if __name__ == "__main__":
