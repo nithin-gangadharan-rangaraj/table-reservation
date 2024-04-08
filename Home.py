@@ -15,11 +15,6 @@ style = '''
           color: white;
         }
         
-        /* Targeting the text color of elements within the date picker presentation */
-        div[role="presentation"] div {
-          color: white;
-        }
-        
         /* Targeting the color of buttons within the calendar */
         div[data-baseweb="calendar"] button {
           color: white;
