@@ -10,19 +10,25 @@ style = '''
                     padding-top: 2rem;
                     padding-bottom: 0rem;
                 }
+        /* Targeting the date input text color */
         div[class="stDateInput"] div[class="st-b8"] input {
-                                                            color: white;
-                                                            }
-
+          color: white;
+        }
+        
+        /* Targeting the text color of elements within the date picker presentation */
+        div[role="presentation"] div {
+          color: white;
+        }
+        
         /* Targeting the color of buttons within the calendar */
-      div[data-baseweb="calendar"] button {
-        color: white;
-      }
-      
-      /* Targeting the background color of the date numbers within the calendar */
-      div[data-baseweb="calendar"] button[role="gridcell"] {
-        background-color: white;
-      }
+        div[data-baseweb="calendar"] button {
+          color: white;
+        }
+        
+        /* Targeting the background color of the calendar */
+        div[data-baseweb="calendar"] div[role="grid"] {
+          background-color: white;
+        }
     </style>
 '''
 st.markdown(style, unsafe_allow_html=True)
