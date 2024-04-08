@@ -10,10 +10,7 @@ style = '''
                     padding-top: 2rem;
                     padding-bottom: 0rem;
                 }
-        /* Targeting the date input text color */
-        div[class="stDateInput"] div[class="st-b8"] input {
-          color: white;
-        }
+        
         
         /* Targeting the background color of the calendar */
         div[data-baseweb="calendar"] div[role="grid"] {
