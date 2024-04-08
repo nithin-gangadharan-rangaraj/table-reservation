@@ -13,13 +13,16 @@ style = '''
         div[class="stDateInput"] div[class="st-b8"] input {
                                                             color: white;
                                                             }
-        div[role="presentation"] div{
-                                        color: white;
-                                        }
 
-        div[data-baseweb="calendar"] button {
-                                        color:white
-                                        };
+        /* Targeting the color of buttons within the calendar */
+      div[data-baseweb="calendar"] button {
+        color: white;
+      }
+      
+      /* Targeting the background color of the date numbers within the calendar */
+      div[data-baseweb="calendar"] button[role="gridcell"] {
+        background-color: white;
+      }
     </style>
 '''
 st.markdown(style, unsafe_allow_html=True)
