@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 import pytz
 
-hide_decoration_bar_style = '''
+style = '''
     <style>
         header {visibility: hidden;}
         MainMenu {visibility: hidden;}
@@ -10,9 +10,19 @@ hide_decoration_bar_style = '''
                     padding-top: 2rem;
                     padding-bottom: 0rem;
                 }
+        div[class="stDateInput"] div[class="st-b8"] input {
+                                                            color: white;
+                                                            }
+        div[role="presentation"] div{
+                                        color: white;
+                                        }
+
+        div[data-baseweb="calendar"] button {
+                                        color:white
+                                        };
     </style>
 '''
-st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+st.markdown(style, unsafe_allow_html=True)
 australian_timezone = pytz.timezone('Australia/Sydney')
 
 def all_time_slots():
