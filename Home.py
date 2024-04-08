@@ -10,6 +10,9 @@ hide_decoration_bar_style = '''
                     padding-top: 2rem;
                     padding-bottom: 0rem;
                 }
+        div[data-baseweb="input"] > input[type="date"] {
+                                    background-color: #FFFFFF; /* Change to desired background color */
+                                }
     </style>
 '''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
