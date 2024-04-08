@@ -15,11 +15,6 @@ style = '''
           color: white;
         }
         
-        /* Targeting the color of buttons within the calendar */
-        div[data-baseweb="calendar"] button {
-          color: white;
-        }
-        
         /* Targeting the background color of the calendar */
         div[data-baseweb="calendar"] div[role="grid"] {
           background-color: white;
