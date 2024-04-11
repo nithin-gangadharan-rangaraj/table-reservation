@@ -76,7 +76,7 @@ def get_info(conn):
             with st.spinner('Please wait...'):
                 add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
     else:
-        st.write('Invalid Name or Contact number.')
+        st.write(':white[Invalid Name or Contact number.]')
 
 def check_availability(group_size, book_time, df, next_slot = None):
     to_check = df[book_time].sum() + df[next_slot].sum() if next_slot else df[book_time].sum()
