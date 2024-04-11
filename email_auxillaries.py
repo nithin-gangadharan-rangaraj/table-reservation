@@ -7,7 +7,7 @@ import smtplib
 
 
 def send_information(name, number, size, time, date):
-    try:
+    # try:
         multipart = MIMEMultipart()
         multipart["From"] = f"Reservation <{st.secrets['email']}>"
         multipart["To"] = st.secrets['email']
@@ -32,5 +32,5 @@ def send_information(name, number, size, time, date):
         server.login(st.secrets['email'], st.secrets['password'])
         server.sendmail(st.secrets['email'], st.secrets['email'], multipart.as_string())
         server.quit()
-    except:
-        st.error("Sorry! There is some technical error, please call the restaurant for confirmation.")
+    # except:
+    #     st.error("Sorry! There is some technical error, please call the restaurant for confirmation.")
