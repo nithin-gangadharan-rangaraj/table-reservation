@@ -55,10 +55,10 @@ def get_valid_dates():
     date_list = [date.strftime('%d/%m/%Y') for date in [today + timedelta(days=i) for i in range(7)]]
     return date_list
 
-def verify_contact(num):
-    return len(str(num)) == 10 and num.isnumeric()
+def verify_contact(name, num):
+    return len(str(num)) == 10 and num.isnumeric() and name != ''
 
-def get_info():
+def get_info(conn):
   with st.container(border=False):
     book_name = st.text_input("❓Name")
     book_number = st.text_input("📞 Contact number")
@@ -66,14 +66,35 @@ def get_info():
 
     today, seventh_day = get_start_end_dates()
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
-
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
-    if verify_contact(book_number):
+      
+    if verify_details(book_name, book_number):
         if st.button("Reserve", type = "primary", use_container_width = True):
+            add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
             st.write("This functionality is not working yet. :(")
     else:
         st.write('Contact number should have 10 digits.')
+
+def check_availability(group_size, book_time, df, next_slot = None):
+    to_check = df[book_time].sum() + df[next_slot].sum() if next_slot else df[book_time].sum()
+    return to_check <= 70
+
+def add_reservation(book_name, book_number, group_size, book_date, book_time, conn):
+    time_slots = [slot.strftime('%H:%M') for slot in all_time_slots()]
+    next_slot = time_slots[time_slots.index(book_time) + 1] if book_time != '22:00' else None
+
+    df = read_worksheet(conn, book_date.strftime('%d/%m/%Y'))
+    
+    if check_availability(group_size, book_time, df, next_slot):
+        if next_slot:
+            df.loc[len(df)] = {'Name': book_name, 'Group size': group_size, 'Number': book_number, book_time: int(group_size), next_slot: int(group_size)}
+        else:
+            df.loc[len(df)] = {'Name': book_name, 'Group size': group_size, 'Number': book_number, book_time: int(group_size)}
+        update_worksheet(conn, book_date.strftime('%d/%m/%Y'), df)
+        st.write(f'Reserved! See you at {book_time}')
+    else:
+        st.write('Sorry! Please check for another time slot.')
 
 def create_new_df():
     columns = ['Name', 'Group size', 'Number'] + [slot.strftime('%H:%M') for slot in all_time_slots()]
@@ -96,5 +117,6 @@ def check_sheets(conn):
 
 if __name__ == "__main__":
   conn = initiate()
+  get_info(conn)
   check_sheets(conn)
-  get_info()
+  
