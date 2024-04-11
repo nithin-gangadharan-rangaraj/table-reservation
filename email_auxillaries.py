@@ -3,6 +3,7 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+import os
 
 
 
@@ -13,8 +14,8 @@ def send_information(name, number, size, time, date):
             email = st.secrets['email']
             password = st.secrets['password']
         except KeyError:
-            email = dict(eval(os.environ.get("email")))
-            password = dict(eval(os.environ.get("password")))
+            email = os.environ.get("email")
+            password = os.environ.get("password")
             
         multipart["From"] = f"Reservation <{email}>"
         multipart["To"] = email
