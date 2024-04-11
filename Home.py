@@ -90,7 +90,8 @@ def add_reservation(book_name, book_number, group_size, book_date, book_time, co
             df.loc[len(df) + 1] = {'Name': book_name, 'Group size': group_size, 'Number': book_number, book_time: int(group_size), next_slot: int(group_size)}
         else:
             df.loc[len(df) + 1] = {'Name': book_name, 'Group size': group_size, 'Number': book_number, book_time: int(group_size)}
-        update_worksheet(conn, book_date.strftime('%d/%m/%Y'), df)
+        st.dataframe(df)
+        # update_worksheet(conn, book_date.strftime('%d/%m/%Y'), df)
         st.write(f'Reserved! See you at {book_time}')
     else:
         st.write('Sorry! Please check for another time slot.')
