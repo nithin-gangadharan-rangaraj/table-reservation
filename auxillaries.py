@@ -3,7 +3,7 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 
 def initiate():
-  st.write(GSheetsConnection.__version__)
+  st.write(streamlit_gsheets.__version__)
   conn = st.connection('gsheets', type=GSheetsConnection)
   return conn
 
