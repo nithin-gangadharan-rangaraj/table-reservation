@@ -8,7 +8,7 @@ def initiate():
   df = conn.read(ttl = 0)
   spreadsheet = conn.client._open_spreadsheet()  
   worksheets = spreadsheet.worksheets()
-  st.write(worksheets)
+  st.write(str(worksheets[0]))
   df1 = conn.read(worksheet = worksheets[0], 
                   ttl = 0)
   st.write(df1)
