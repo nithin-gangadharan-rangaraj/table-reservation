@@ -6,7 +6,7 @@ def initiate():
   conn = st.connection('gsheets', type=GSheetsConnection)
   return conn
 
-def worksheet_names(conn)
+def worksheet_names(conn):
   spreadsheet = conn.client._open_spreadsheet()  
   worksheets = [wsheet.title for wsheet in spreadsheet.worksheets()]
   return worksheets
