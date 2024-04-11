@@ -80,8 +80,12 @@ def get_info(conn):
         st.write(':white[Invalid Name or Contact number.]')
 
 def check_availability(group_size, book_time, df, next_slot = None):
-    to_check = df[book_time].sum() + df[next_slot].sum() if next_slot else df[book_time].sum()
-    return to_check <= 70
+    total_seats = 5
+    if next_slot:
+        return df[book_time].sum() <= total_seats and df[next_slot].sum() <= total_seats
+    else:
+        return df[book_time].sum() <= total_seats
+
 
 def add_reservation(book_name, book_number, group_size, book_date, book_time, conn):
     time_slots = [slot.strftime('%H:%M') + ' hrs' for slot in all_time_slots()]
