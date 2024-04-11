@@ -81,12 +81,10 @@ def get_info(conn):
 
 def check_availability(group_size, book_time, df, next_slot = None):
     total_seats = 5
-    st.write(df[book_time].sum())
-    st.write(df[next_slot].sum())
     if next_slot:
-        return df[book_time].sum() <= total_seats and df[next_slot].sum() <= total_seats
+        return df[book_time].sum() + group_size <= total_seats and df[next_slot].sum() + group_size <= total_seats
     else:
-        return df[book_time].sum() <= total_seats
+        return df[book_time].sum() + group_size <= total_seats
 
 
 def add_reservation(book_name, book_number, group_size, book_date, book_time, conn):
