@@ -8,7 +8,6 @@ def initiate():
 
 def worksheet_names(conn):
   try:
-    st.write(type(conn.client))
     spreadsheet = conn.client._open_spreadsheet()  
     worksheets = [wsheet.title for wsheet in spreadsheet.worksheets()]
   except AttributeError:
