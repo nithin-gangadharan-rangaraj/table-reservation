@@ -73,7 +73,7 @@ def get_info(conn):
       
     if verify_details(book_name, book_number):
         if st.button("Reserve", type = "primary", use_container_width = True):
-            with st.spinner('Please wait...')
+            with st.spinner('Please wait...'):
                 add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
     else:
         st.write('Invalid Name or Contact number.')
