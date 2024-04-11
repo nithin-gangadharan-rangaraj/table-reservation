@@ -35,6 +35,7 @@ def all_time_slots():
     while current_time <= end_time:
         time_slots.append(current_time)
         current_time += timedelta(minutes=30)
+        
     return time_slots
 
 def get_valid_time_slots(time_slots, book_date):
@@ -68,10 +69,12 @@ def get_info(conn):
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
+    book_time = book_time + ' hrs'
       
     if verify_details(book_name, book_number):
         if st.button("Reserve", type = "primary", use_container_width = True):
-            add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
+            with st.spinner('Please wait...')
+                add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
     else:
         st.write('Invalid Name or Contact number.')
 
@@ -99,7 +102,7 @@ def add_reservation(book_name, book_number, group_size, book_date, book_time, co
         st.write('Sorry! Please check for another time slot.')
 
 def create_new_df():
-    columns = ['Name', 'Group size', 'Number', '11:00 hrs', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00']
+    columns = ['Name', 'Group size', 'Number'] + [slot.strftime('%H:%M') + ' hrs' for slot in all_time_slots()]
     df = pd.DataFrame(columns=columns)
     return df
 
