@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime, timedelta
 import pytz
+from auxillaries import *
 
 style = '''
     <style>
@@ -63,4 +64,5 @@ def get_info():
         st.write("This functionality is not working yet. :(")
 
 if __name__ == "__main__":
+  df = initiate()
   get_info()
