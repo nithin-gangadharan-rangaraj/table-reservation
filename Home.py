@@ -57,6 +57,7 @@ def get_valid_dates():
 
 def get_info():
   with st.container(border=False):
+    book_name = st.text_input("❓Name")
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
@@ -68,12 +69,22 @@ def get_info():
     if st.button("Reserve", type = "primary", use_container_width = True):
         st.write("This functionality is not working yet. :(")
 
-def check_sheets():
+def create_new_df():
+    columns = ['Name', 'Group size', 'Number'] + [slot.strftime('%H:%M') for slot in all_time_slots()]
+    df = pd.DataFrame(columns=columns)
+    return df
+
+def check_sheets(conn):
     date_list = get_valid_dates()
-    st.write(date_list)
+    existing_worksheets = worksheet_names(conn)
+    to_be_created = list(set(date_list) - set(existing_worksheets))
+    if len(to_be_created) > 0:
+        empty_df = create_new_df()
+        for date in to_be_created:
+            create_worksheet(conn, date, empty_df)
     
 
 if __name__ == "__main__":
   conn = initiate()
-  check_sheets()
+  check_sheets(conn)
   get_info()
