@@ -55,7 +55,7 @@ def get_valid_dates():
     date_list = [date.strftime('%d/%m/%Y') for date in [today + timedelta(days=i) for i in range(7)]]
     return date_list
 
-def verify_contact(name, num):
+def verify_details(name, num):
     return len(str(num)) == 10 and num.isnumeric() and name != ''
 
 def get_info(conn):
