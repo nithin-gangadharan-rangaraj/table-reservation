@@ -61,7 +61,7 @@ def verify_contact(num):
 def get_info():
   with st.container(border=False):
     book_name = st.text_input("❓Name")
-    book_number = st.number_input("📞 Contact number", value = None, placeholder="Enter your number")
+    book_number = st.number_input("📞 Contact number", value = None, placeholder="Enter your number", format = '%d')
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
