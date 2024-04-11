@@ -80,10 +80,14 @@ def create_new_df():
     df = pd.DataFrame(columns=columns)
     return df
 
+def get_new_sheet_names(date_list, existing):
+    new_names = [x for x in date_list if x not in existing]
+    return new_names
+
 def check_sheets(conn):
     date_list = get_valid_dates()
     existing_worksheets = worksheet_names(conn)
-    to_be_created = list(set(date_list) - set(existing_worksheets))
+    to_be_created = get_new_sheet_names(date_list, existing)
     if len(to_be_created) > 0:
         empty_df = create_new_df()
         for date in to_be_created:
