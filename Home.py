@@ -99,7 +99,7 @@ def add_reservation(book_name, book_number, group_size, book_date, book_time, co
         st.write('Sorry! Please check for another time slot.')
 
 def create_new_df():
-    columns = ['Name', 'Group size', 'Number'] + [slot.strftime('%H:%M') for slot in all_time_slots()]
+    columns = ['Name', 'Group size', 'Number'] + [str(slot.strftime('%H:%M')) for slot in all_time_slots()]
     df = pd.DataFrame(columns=columns)
     return df
 
