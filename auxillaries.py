@@ -4,11 +4,30 @@ import pandas as pd
 
 def initiate():
   conn = st.connection('gsheets', type=GSheetsConnection)
-  
-  df = conn.read(ttl = 0)
+  return conn
+
+def worksheet_names(conn)
   spreadsheet = conn.client._open_spreadsheet()  
-  worksheets = spreadsheet.worksheets()
-  df1 = conn.read(worksheet = worksheets[0].title, 
-                  ttl = 0)
-  st.write(df1)
+  worksheets = [wsheet.title for wsheet in spreadsheet.worksheets()]
+  return worksheets
+
+def create_worksheet(conn, name, df):
+  conn.create(
+            worksheet=name,
+            data=df,
+            )
+
+def update_worksheet(conn, wsheet, df):
+  conn.update(
+            worksheet=wsheet,
+            data=df,
+        )
+
+def read_worksheet(conn, wsheet):
+  df = conn.read(
+                worksheet = wsheet,
+                ttl = 0
+        )
   return df
+
+
