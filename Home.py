@@ -80,7 +80,7 @@ def get_info(conn):
         st.write(':white[Invalid Name or Contact number.]')
 
 def check_availability(group_size, book_time, df, next_slot = None):
-    total_seats = 5
+    total_seats = 70
     if next_slot:
         return df[book_time].sum() + group_size <= total_seats and df[next_slot].sum() + group_size <= total_seats
     else:
