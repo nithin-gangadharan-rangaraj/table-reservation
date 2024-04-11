@@ -52,7 +52,7 @@ def get_start_end_dates():
 
 def get_valid_dates():
     today = datetime.now(australian_timezone).date()
-    date_list = [today + timedelta(days=i) for i in range(7)]
+    date_list = [date.strftime('%d/%m/%Y') for date in [today + timedelta(days=i) for i in range(7)]]
     return date_list
 
 def get_info():
