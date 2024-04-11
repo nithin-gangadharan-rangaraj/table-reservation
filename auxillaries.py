@@ -9,4 +9,6 @@ def initiate():
   spreadsheet = conn.client._open_spreadsheet()  
   worksheets = spreadsheet.worksheets()
   st.write(worksheets)
+  df1 = conn.read(worksheets[0], ttl = 0)
+  st.write(df1)
   return df
