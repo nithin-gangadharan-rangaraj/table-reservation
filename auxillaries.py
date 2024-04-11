@@ -1,10 +1,8 @@
 import streamlit as st
-import streamlit_gsheets
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 
 def initiate():
-  st.write(st-gsheets-connection.__version__)
   conn = st.connection('gsheets', type=GSheetsConnection)
   return conn
 
