@@ -83,7 +83,7 @@ def check_availability(group_size, book_time, df, next_slot = None):
     return to_check <= 70
 
 def add_reservation(book_name, book_number, group_size, book_date, book_time, conn):
-    time_slots = [slot.strftime('%H:%M') for slot in all_time_slots()]
+    time_slots = [slot.strftime('%H:%M') + ' hrs' for slot in all_time_slots()]
     next_slot = time_slots[time_slots.index(book_time) + 1] if book_time != '22:00' else None
 
     df = read_worksheet(conn, book_date.strftime('%d/%m/%Y'))
