@@ -77,7 +77,6 @@ def get_info(conn):
 
 def check_availability(group_size, book_time, df, next_slot = None):
     to_check = df[book_time].sum() + df[next_slot].sum() if next_slot else df[book_time].sum()
-    st.write(to_check)
     return to_check <= 70
 
 def add_reservation(book_name, book_number, group_size, book_date, book_time, conn):
@@ -85,7 +84,7 @@ def add_reservation(book_name, book_number, group_size, book_date, book_time, co
     next_slot = time_slots[time_slots.index(book_time) + 1] if book_time != '22:00' else None
 
     df = read_worksheet(conn, book_date.strftime('%d/%m/%Y'))
-    
+    df.dropna(how='all')
     if check_availability(group_size, book_time, df, next_slot):
         if next_slot:
             df.loc[len(df) + 1] = {'Name': book_name, 'Group size': group_size, 'Number': book_number, book_time: int(group_size), next_slot: int(group_size)}
