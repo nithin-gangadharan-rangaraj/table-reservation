@@ -6,6 +6,6 @@ def initiate():
   conn = st.connection('gsheets', type=GSheetsConnection)
   
   df = conn.read(ttl = 0)
-  worksheets = conn.worksheets()
+  worksheets = conn.Worksheets()
   st.write(worksheets)
   return df
