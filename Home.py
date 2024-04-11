@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 import pytz
 from auxillaries import *
+from email_auxillaries import *
 
 style = '''
     <style>
@@ -96,6 +97,7 @@ def add_reservation(book_name, book_number, group_size, book_date, book_time, co
             df.loc[len(df) + 1] = {'Name': book_name, 'Group size': group_size, 'Number': book_number, book_time: int(group_size)}
         df = df.reset_index(drop=True)
         update_worksheet(conn, book_date.strftime('%d/%m/%Y'), df)
+        send_information(book_name, book_number, group_size, book_time, book_date)
         st.write(f'Reserved :) See you at {book_time}')
     else:
         st.write('Sorry! Please check for another time slot.')
