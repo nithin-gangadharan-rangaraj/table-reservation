@@ -56,12 +56,12 @@ def get_valid_dates():
     return date_list
 
 def verify_contact(num):
-    return len(str(num)) == 10
+    return len(str(num)) == 10 and num.isnumeric()
 
 def get_info():
   with st.container(border=False):
     book_name = st.text_input("❓Name")
-    book_number = st.number_input("📞 Contact number", value = None, placeholder="Enter your number", format = '%d')
+    book_number = st.text_input("📞 Contact number")
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
