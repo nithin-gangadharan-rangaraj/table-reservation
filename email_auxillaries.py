@@ -9,8 +9,15 @@ import smtplib
 def send_information(name, number, size, time, date):
     # try:
         multipart = MIMEMultipart()
-        multipart["From"] = f"Reservation <{st.secrets['email']}>"
-        multipart["To"] = st.secrets['email']
+        try:
+            email = st.secrets['email']
+            password = st.secrets['password']
+        except KeyError:
+            email = dict(eval(os.environ.get("email")))
+            password = dict(eval(os.environ.get("password")))
+            
+        multipart["From"] = f"Reservation <{email}>"
+        multipart["To"] = email
         multipart["Subject"] = f'Reservation for {name.upper()}'  
     
         message = f"""\
@@ -29,8 +36,8 @@ def send_information(name, number, size, time, date):
         
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login(st.secrets['email'], st.secrets['password'])
-        server.sendmail(st.secrets['email'], st.secrets['email'], multipart.as_string())
+        server.login(email, password)
+        server.sendmail(email, email, multipart.as_string())
         server.quit()
     # except:
     #     st.error("Sorry! There is some technical error, please call the restaurant for confirmation.")
