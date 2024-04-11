@@ -87,7 +87,7 @@ def get_new_sheet_names(date_list, existing):
 def check_sheets(conn):
     date_list = get_valid_dates()
     existing_worksheets = worksheet_names(conn)
-    to_be_created = get_new_sheet_names(date_list, existing)
+    to_be_created = get_new_sheet_names(date_list, existing_worksheets)
     if len(to_be_created) > 0:
         empty_df = create_new_df()
         for date in to_be_created:
