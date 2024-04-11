@@ -61,7 +61,7 @@ def verify_contact(num):
 def get_info():
   with st.container(border=False):
     book_name = st.text_input("❓Name")
-    book_number = st.number_input("📞 Contact number")
+    book_number = st.number_input("📞 Contact number", placeholder="Enter your number")
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
@@ -69,7 +69,7 @@ def get_info():
 
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
-    if verify_contact(book_num):
+    if verify_contact(book_number):
         if st.button("Reserve", type = "primary", use_container_width = True):
             st.write("This functionality is not working yet. :(")
     else:
