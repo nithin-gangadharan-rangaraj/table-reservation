@@ -7,8 +7,11 @@ def initiate():
   return conn
 
 def worksheet_names(conn):
-  spreadsheet = conn.client._open_spreadsheet()  
-  worksheets = [wsheet.title for wsheet in spreadsheet.worksheets()]
+  try:
+    spreadsheet = conn.client._open_spreadsheet()  
+    worksheets = [wsheet.title for wsheet in spreadsheet.worksheets()]
+  except AttributeError:
+    worksheets = [wsheet.title for wsheet in conn.worksheets()]
   return worksheets
 
 def create_worksheet(conn, name, df):
