@@ -45,16 +45,21 @@ def get_valid_time_slots(time_slots, book_date):
         valid_slots = [f"{t.hour}:{t.minute:02d}" for t in time_slots if t > current_time]
     return valid_slots
 
-def get_valid_dates():
+def get_start_end_dates():
     today = datetime.now(australian_timezone).date()
     seventh_day = today + timedelta(days=6)
     return today, seventh_day
+
+def get_valid_dates():
+    today = datetime.now(australian_timezone).date()
+    date_list = [today + timedelta(days=i) for i in range(7)]
+    return date_list
 
 def get_info():
   with st.container(border=False):
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
-    today, seventh_day = get_valid_dates()
+    today, seventh_day = get_start_end_dates()
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
 
       
@@ -63,6 +68,12 @@ def get_info():
     if st.button("Reserve", type = "primary", use_container_width = True):
         st.write("This functionality is not working yet. :(")
 
+def check_sheets():
+    date_list = get_valid_dates()
+    st.write(date_list)
+    
+
 if __name__ == "__main__":
-  df = initiate()
+  conn = initiate()
+  check_sheets()
   get_info()
