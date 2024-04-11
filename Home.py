@@ -65,5 +65,5 @@ def get_info():
 
 if __name__ == "__main__":
   df = initiate()
-  st.write(df)
+  st.write(df["Sheet1"])
   get_info()
