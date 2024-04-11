@@ -55,9 +55,13 @@ def get_valid_dates():
     date_list = [date.strftime('%d/%m/%Y') for date in [today + timedelta(days=i) for i in range(7)]]
     return date_list
 
+def verify_contact(num):
+    return len(str(num)) == 10
+
 def get_info():
   with st.container(border=False):
     book_name = st.text_input("❓Name")
+    book_number = st.number_input("📞 Contact number")
     group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
@@ -65,9 +69,11 @@ def get_info():
 
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
-    
-    if st.button("Reserve", type = "primary", use_container_width = True):
-        st.write("This functionality is not working yet. :(")
+    if verify_contact(book_num):
+        if st.button("Reserve", type = "primary", use_container_width = True):
+            st.write("This functionality is not working yet. :(")
+    else:
+        st.write('Contact number should have 10 digits.')
 
 def create_new_df():
     columns = ['Name', 'Group size', 'Number'] + [slot.strftime('%H:%M') for slot in all_time_slots()]
@@ -78,7 +84,6 @@ def check_sheets(conn):
     date_list = get_valid_dates()
     existing_worksheets = worksheet_names(conn)
     to_be_created = list(set(date_list) - set(existing_worksheets))
-    st.write(to_be_created)
     if len(to_be_created) > 0:
         empty_df = create_new_df()
         for date in to_be_created:
