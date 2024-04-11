@@ -65,4 +65,5 @@ def get_info():
 
 if __name__ == "__main__":
   df = initiate()
+  st.write(df)
   get_info()
