@@ -62,9 +62,9 @@ def verify_details(name, num):
 
 def get_info(conn):
   with st.container(border=False):
-    book_name = st.text_input("❓Name")
+    book_name = st.text_input("🤵‍♂️Name")
     book_number = str(st.text_input("📞 Contact number"))
-    group_size = st.number_input("🤵‍♂️Size of the Group", min_value = 1, max_value = 12)
+    group_size = st.number_input("👨‍👩‍👧‍👧 Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
