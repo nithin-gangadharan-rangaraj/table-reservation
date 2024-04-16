@@ -70,14 +70,16 @@ def get_info(conn):
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
-    book_time = book_time + ' hrs'
-      
-    if verify_details(book_name, book_number):
-        if st.button("Reserve", type = "primary", use_container_width = True):
-            with st.spinner('Please wait...'):
-                add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
+    if not book_time is None:
+        book_time = book_time + ' hrs'
+        if verify_details(book_name, book_number):
+            if st.button("Reserve", type = "primary", use_container_width = True):
+                with st.spinner('Please wait...'):
+                    add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
+        else:
+            st.write(':white[Invalid Name or Contact number.]')
     else:
-        st.write(':white[Invalid Name or Contact number.]')
+        st.write('Sorry, the restaurant is closed for the selected date :(')
 
 def check_availability(group_size, book_time, df, next_slot = None):
     total_seats = 70
