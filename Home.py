@@ -67,6 +67,7 @@ def get_info(conn):
     group_size = st.number_input("👨‍👩‍👧‍👧 Size of the Group", min_value = 1, max_value = 12)
 
     today, seventh_day = get_start_end_dates()
+    st.write(today)
     book_date = st.date_input("📅 Reservation Date", min_value=today, max_value=seventh_day, format="DD/MM/YYYY", help = "Can be reserved for the next 6 days.")
       
     book_time = st.selectbox("🕛 Pick a Time Slot", options = get_valid_time_slots(all_time_slots(), book_date))
