@@ -1,6 +1,7 @@
 streamlit
 gunicorn
 pandas
+numpy==1.26.4
 gspread
 google-auth
 st-gsheets-connection
