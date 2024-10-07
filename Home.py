@@ -77,7 +77,7 @@ def get_info(conn):
                 with st.spinner('Please wait...'):
                     add_reservation(book_name, book_number, group_size, book_date, book_time, conn)
         else:
-            st.write(':white[Invalid Name or Contact number.]')
+            st.write('Invalid Name or Contact number')
     else:
         st.write('Sorry, the restaurant is closed for the selected date :(')
 
