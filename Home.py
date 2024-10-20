@@ -35,7 +35,7 @@ def all_time_slots():
     current_time = start_time
     while current_time <= end_time:
         time_slots.append(current_time)
-        current_time += timedelta(minutes=30)
+        current_time += timedelta(minutes=45)
         
     return time_slots
 
